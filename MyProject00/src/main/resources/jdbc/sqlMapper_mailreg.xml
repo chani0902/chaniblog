@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--mapper에서 추후 프로젝트시 여러 개의 자료들을 다룰 때, namespace를 유일한 이름으로 생성하는 게 중요하다 namespace가 
+	다름에도 혹시 충돌이 발생한다면, 각각의 id에도 차이를 둬야한다 -->
+
+<mapper namespace="com.test.myproject.member.model.MemberDAO">
+	
+	<!-- 이메일 인증 구현 (난수키 생성)-->
+	<update id="GetKey" parameterType="Map">
+		update member set authkey = #{param2} where member_id = #{param1}
+	</update>
+	
+	<!-- 이메일 인증 구현 (인증 상태 변경)-->
+	<update id="alter_userKey" parameterType="Map">
+		update member set AUTHSTATUS = 1 where member_id = #{param1} and authkey = #{param2}
+	</update>
+
+	
+</mapper>

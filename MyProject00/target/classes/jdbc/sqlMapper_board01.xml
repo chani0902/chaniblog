@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--mapper에서 추후 프로젝트시 여러 개의 자료들을 다룰 때, namespace를 유일한 이름으로 생성하는 게 중요하다 namespace가 
+	다름에도 혹시 충돌이 발생한다면, 각각의 id에도 차이를 둬야한다 -->
+
+<mapper namespace="com.test.myproject.board01">
+	<insert id="B01_INSERT">
+		insert into board01(board01_num, board01_title,
+		board01_writer, board01_content, writercheck) values(seq_board01.nextval,
+		#{board01_title}, #{board01_writer}, #{board01_content}, #{writercheck})
+	</insert>
+
+	<update id="B01_UPDATE">
+		update board01 set board01_title = #{board01_title},
+		board01_content = #{board01_content} where board01_num =
+		#{board01_num} and writercheck = #{writercheck}
+	</update>
+
+	<delete id="B01_DELETE">
+		delete from board01 where board01_num =
+		#{board01_num}
+	</delete>
+
+	<select id="B01_SELECT_ONE"
+		resultType="com.test.myproject.board01.model.Board01VO">
+		select board01_num, board01_title, board01_writer,
+		board01_content, board01_viewcnt, board01_regdate, writercheck, reply_cnt from board01 where
+		board01_num = #{board01_num}
+	</select>
+
+	<select id="B01_SELECT_ALL"
+		resultType="com.test.myproject.board01.model.Board01VO">
+		select board01_num, board01_title, board01_writer,
+		board01_viewcnt, board01_regdate, reply_cnt from board01 order by board01_num
+		desc
+	</select>
+	<!-- 나오는 리스트의 갯수를 제한해주는 쿼리 -->
+	<select id="B01_LIST_PAGE"
+		resultType="com.test.myproject.board01.model.Board01VO"
+		parameterType="com.test.myproject.board01.model.Criteria">
+		select board01_num, board01_title, board01_writer, board01_content,
+		board01_viewcnt, board01_regdate, reply_cnt from (select board01_num,
+		board01_title, board01_writer, board01_content, board01_viewcnt,
+		board01_regdate, reply_cnt, row_number() over(order by board01_num desc) as rNum
+		from board01) where rNum between #{rowStart} and #{rowEnd} order by
+		board01_num desc
+	</select>
+	
+	<!-- 조회수가 높은 순서대로 갯수 제한하여 정렬하는 쿼리 -->
+	<select id="B01_POP_POST"
+		resultType="com.test.myproject.board01.model.Board01VO"
+		parameterType="com.test.myproject.board01.model.Criteria">
+		select board01_num, board01_title, board01_writer, board01_content,
+		board01_viewcnt, board01_regdate, reply_cnt from (select board01_num,
+		board01_title, board01_writer, board01_content, board01_viewcnt,
+		board01_regdate, reply_cnt, row_number() over(order by board01_viewcnt desc) as rNum
+		from board01) where rNum between #{rowStart} and #{rowEnd} order by
+		board01_viewcnt desc
+	</select>
+
+	<select id="B01_LIST_SEARCH"
+		resultType="com.test.myproject.board01.model.Board01VO"
+		parameterType="com.test.myproject.board01.model.SearchCriteria">
+		select board01_num, board01_title, board01_writer, board01_content, board01_viewcnt, board01_regdate, reply_cnt from 
+		(select board01_num, board01_title, board01_writer, board01_content, board01_viewcnt, board01_regdate, reply_cnt, 
+		row_number() over(order by board01_num desc) as rNum from board01 <include refid="search"></include>) 
+		where rNum between #{rowStart} and #{rowEnd} order by board01_num desc
+		</select>
+
+	<sql id="search">
+		<if test="searchKey != null">
+			<if test="searchKey == 't'.toString()">where board01_title like '%' || #{searchWord} || '%'</if>
+			<if test="searchKey == 'c'.toString()">where board01_content like '%' || #{searchWord} || '%'
+			</if>
+			<if test="searchKey == 'w'.toString()">where board01_writer like '%' || #{searchWord} || '%'
+			</if>
+		</if>
+	</sql>
+
+<!-- 검색어에 맞는 게시물 갯수 구하는 쿼리 -->
+	<select id="B01_COUNT_SEARCH" resultType="int">
+	select count(board01_num) from board01 <![CDATA[where board01_num > 0]]> <include refid="search2"></include></select>
+
+	<sql id="search2">
+		<if test="searchKey != null">
+			<if test="searchKey == 't'.toString()">and board01_title like '%' || #{searchWord} || '%'</if>
+			<if test="searchKey == 'c'.toString()">and board01_content like '%' || #{searchWord} || '%'
+			</if>
+			<if test="searchKey == 'w'.toString()">and board01_writer like '%' || #{searchWord} || '%'
+			</if>
+		</if>
+	</sql>
+
+	<select id="B01_LIST_COUNT" resultType="int">
+	<![CDATA[
+	select count(board01_num) from board01 where board01_num > 0
+	]]>
+	</select>
+
+	<select id="B01_SEARCH_LIST_TITLE"
+		resultType="com.test.myproject.board01.model.Board01VO">
+		select board01_num, board01_title, board01_writer,
+		board01_viewcnt, board01_regdate from board01 where board01_title like
+		#{searchWord}
+	</select>
+
+	<select id="B01_SEARCH_LIST_CONTENT"
+		resultType="com.test.myproject.board01.model.Board01VO">
+		select board01_num, board01_title, board01_writer,
+		board01_viewcnt, board01_regdate from board01 where board01_content
+		like #{searchWord}
+	</select>
+
+	<select id="B01_SEARCH_LIST_WRITER"
+		resultType="com.test.myproject.board01.model.Board01VO">
+		select board01_num, board01_title, board01_writer,
+		board01_viewcnt, board01_regdate from board01 where board01_writer
+		like #{searchWord}
+	</select>
+	<!-- 제목으로 검색, 작성자로 검색, 내용으로 검색 정도??, 전부 like 검색으로 -->
+	
+	<!-- 게시글 조회수 증가 -->
+	<update id="B01_VIEWCOUNT">
+		update board01 set board01_viewcnt = board01_viewcnt +1 where board01_num = #{board01_num}
+	</update>
+	
+	<!-- 게시글 댓글 개수 체크 -->
+	<update id="B01_REPLYCNT">
+		update board01 b set b.reply_cnt = (select count(reply01_num) from reply01 where board01_num = #{board01_num}) where b.board01_num = #{board01_num}
+	</update>
+	
+</mapper>

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+input {
+	height: 20px;
+	font-size : 15px;
+}
+select{
+	height: 36px;
+	margin-left: 20px;
+}

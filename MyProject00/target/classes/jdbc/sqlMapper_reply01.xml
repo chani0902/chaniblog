@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--mapper에서 추후 프로젝트시 여러 개의 자료들을 다룰 때, namespace를 유일한 이름으로 생성하는 게 중요하다 namespace가 
+	다름에도 혹시 충돌이 발생한다면, 각각의 id에도 차이를 둬야한다 -->
+
+<mapper namespace="com.test.myproject.reply01">
+
+	<!-- 댓글 조회 -->
+	<select id="R01_SELECT_ALL"
+		resultType="com.test.myproject.reply01.model.Reply01VO">
+		select reply01_num, reply01_content, reply01_writer,
+		reply01_regdate, writercheck from reply01 where board01_num =
+		#{board01_num} order by reply01_regdate desc
+	</select>
+
+	<!-- 하나의 댓글 조회(selectOne) -->
+	<select id="R01_SELECT_ONE"
+		resultType="com.test.myproject.reply01.model.Reply01VO">
+		select board01_num, reply01_num, reply01_content,
+		reply01_writer,
+		reply01_regdate, writercheck from reply01 where
+		reply01_num =
+		#{reply01_num}
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="R01_INSERT">
+		insert into reply01(board01_num, reply01_num,
+		reply01_content, reply01_writer, writercheck) values (#{board01_num},
+		seq_reply01.nextval, #{reply01_content}, #{reply01_writer},
+		#{writercheck})
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="R01_UPDATE">
+		update reply01
+		set
+		reply01_content = #{reply01_content}
+		where reply01_num = #{reply01_num} and writercheck = #{writercheck}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="R01_DELETE">
+		delete from reply01
+		where reply01_num = #{reply01_num} 
+	</delete>
+
+</mapper>

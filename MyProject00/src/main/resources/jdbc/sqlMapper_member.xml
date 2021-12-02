@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--mapper에서 추후 프로젝트시 여러 개의 자료들을 다룰 때, namespace를 유일한 이름으로 생성하는 게 중요하다 namespace가 
+	다름에도 혹시 충돌이 발생한다면, 각각의 id에도 차이를 둬야한다 -->
+
+<mapper namespace="com.test.myproject.member">
+	<insert id="MV_INSERT">
+		insert into member(member_num, member_id, member_pw,
+		member_nickname, member_email, member_img) values(seq_member.nextval,
+		#{member_id}, #{member_pw}, #{member_nickname}, #{member_email},
+		#{member_img, jdbcType=VARCHAR})
+	</insert>
+
+	<update id="MV_UPDATE">
+		update member set member_pw = #{member_pw},
+		member_nickname = #{member_nickname}, member_email = #{member_email},
+		member_img = #{member_img, jdbcType=VARCHAR} where member_id =
+		#{member_id}
+	</update>
+
+	<delete id="MV_DELETE">
+		delete from member where member_id = #{member_id}
+	</delete>
+
+	<select id="MV_SELECT_ONE"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_num, member_id, member_pw, member_nickname,
+		member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS from member
+		where member_id = #{member_id}
+	</select>
+
+	<select id="MV_SELECT_ALL"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_num, member_id, member_pw, member_nickname,
+		member_email, nvl(member_img,'default.jpg') member_img from member
+		order by member_num desc
+	</select>
+
+	<select id="MV_SEARCH_LIST_NICKNAME"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_num, member_id, member_pw, member_nickname,
+		member_email, nvl(member_img,'default.jpg') member_img from member
+		where member_nickname like #{searchWord}
+	</select>
+
+	<select id="MV_SEARCH_LIST_ID"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_num, member_id, member_pw, member_nickname,
+		member_email, nvl(member_img,'default.jpg') member_img from member
+		where member_id like #{searchWord}
+	</select>
+
+	<!-- 로그인 기능 -->
+	<select id="MV_LOGIN"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_num, member_id, member_pw, member_nickname, member_email,
+		nvl(member_img,'default.jpg') member_img from member where member_id =
+		#{member_id} and member_pw = #{member_pw}
+	</select>
+	<!-- 아이디 검색은 관리자용, 닉네임 검색은 일반 유저도 가능 .. 대신 나타날 정보가 제한적이어야함 -->
+
+	<!-- 아이디 중복 확인 -->
+	<select id="MV_ID_CHECK"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_id from member where member_id = #{member_id}
+	</select>
+	
+	<!-- 이메일 중복 확인 -->
+	<select id="MV_MAIL_CHECK"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_email from member where member_email = #{member_email}
+	</select>
+
+	<!-- 로그인 - 암호화 적용 -->
+	<select id="loginBcrypt" resultType="com.test.myproject.member.model.MemberVO">
+		select
+		member_num, member_id, member_pw, member_nickname, member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS 
+		from member where member_id = #{member_id}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="MV_FIND_ID"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_id from member where member_email = #{member_email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="MV_FIND_PW"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select member_num, member_id, member_nickname,
+		member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS from member
+		where member_id = #{member_id} and member_email = #{member_email}
+	</select>
+	
+	<!-- 새 비밀번호 설정 -->
+	<update id="MV_NEWPW">
+		update member set member_pw = #{member_pw}
+		where member_id = #{member_id}
+	</update>
+
+	
+</mapper>
