@@ -37,6 +37,7 @@
 					<th scope="cols">ID</th>
 					<th scope="cols">닉네임</th>
 					<th scope="cols">이메일</th>
+					<th scope="cols">포인트</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,6 +50,7 @@
 						<td><a href="mv_selectOne.do?member_id=${vo.member_id}">${vo.member_id}</a></td>
 						<td>${vo.member_nickname}</td>
 						<td>${vo.member_email}</td>
+						<td>${vo.member_point}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

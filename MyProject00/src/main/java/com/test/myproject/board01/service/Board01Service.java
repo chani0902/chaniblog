@@ -84,4 +84,9 @@ public class Board01Service {
 		return dao.reply_cnt(board01_num);
 	}
 	
+	public Board01VO rp_mine(int board01_num) {
+		
+		return dao.rp_mine(board01_num);
+	}
+	
 } // end class

@@ -16,6 +16,7 @@ public class MemberVO implements Serializable {
 //		이메일 인증 관련
 		private String authKey;
 		private int authStatus;
+		private int member_point;
 		
 		public int getMember_num() {
 			return member_num;
@@ -71,6 +72,12 @@ public class MemberVO implements Serializable {
 		public void setAuthStatus(int authStatus) {
 			this.authStatus = authStatus;
 		}
+		public int getMember_point() {
+			return member_point;
+		}
+		public void setMember_point(int member_point) {
+			this.member_point = member_point;
+		}
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -82,6 +89,7 @@ public class MemberVO implements Serializable {
 			result = prime * result + ((member_img == null) ? 0 : member_img.hashCode());
 			result = prime * result + ((member_nickname == null) ? 0 : member_nickname.hashCode());
 			result = prime * result + member_num;
+			result = prime * result + member_point;
 			result = prime * result + ((member_pw == null) ? 0 : member_pw.hashCode());
 			result = prime * result + ((multipartFile == null) ? 0 : multipartFile.hashCode());
 			return result;
@@ -124,6 +132,8 @@ public class MemberVO implements Serializable {
 				return false;
 			if (member_num != other.member_num)
 				return false;
+			if (member_point != other.member_point)
+				return false;
 			if (member_pw == null) {
 				if (other.member_pw != null)
 					return false;
@@ -141,7 +151,9 @@ public class MemberVO implements Serializable {
 			return "MemberVO [member_num=" + member_num + ", member_id=" + member_id + ", member_pw=" + member_pw
 					+ ", member_nickname=" + member_nickname + ", member_email=" + member_email + ", member_img="
 					+ member_img + ", multipartFile=" + multipartFile + ", authKey=" + authKey + ", authStatus="
-					+ authStatus + "]";
+					+ authStatus + ", member_point=" + member_point + "]";
 		}
+		
+		
 	
 } // end class

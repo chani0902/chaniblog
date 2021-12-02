@@ -108,12 +108,16 @@
 		</div>
 
 		<c:choose>
+			<c:when test="${msg == '글 작성 성공'}">
+				<script>
+					alert("글이 성공적으로 등록되었습니다!");
+				</script>
+			</c:when>
 			<c:when test="${msg == '글 수정 성공'}">
 				<script>
 					alert("글 수정을 성공적으로 마쳤습니다!");
 				</script>
 			</c:when>
-			
 			<c:when test="${msg == '글 삭제 성공'}">
 				<script>
 					alert("작성 글이 삭제되었습니다.");

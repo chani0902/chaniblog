@@ -170,6 +170,26 @@ public class MemberDAOimpl implements MemberDAO {
 		return flag;
 	}
 
+	@Override
+	public int POINT_POST(String member_id, String point) {
+		logger.info("POINT_POST()");
+		int result = 0;
+		dao = userSqlSession.getMapper(MemberDAO.class);
+		result = dao.POINT_POST(member_id, point);
+		
+		return result;
+	}
+
+	@Override
+	public List<MemberVO> hotuser() {
+		logger.info("mv_selectAll()");
+		List<MemberVO> list2 = sqlSession.selectList("MV_HOT_USER");
+		
+		logger.info("mv_selectAll list size() : " + list2.size());
+		return list2;
+	}
+
+
 	
 
 	

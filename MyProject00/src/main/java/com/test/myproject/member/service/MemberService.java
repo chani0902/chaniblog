@@ -79,6 +79,14 @@ public class MemberService {
 	public int alter_userKey(String member_id, String key) {
 		return dao.alter_userKey(member_id, key);
 	}
+	
+	public int POINT_POST(String member_id, String point) {
+		return dao.POINT_POST(member_id, point);
+	}
+	
+	public List<MemberVO> hotuser() {
+		return dao.hotuser();
+	}
 
 	
 }

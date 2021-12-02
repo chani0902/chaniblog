@@ -69,7 +69,10 @@
 						pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			</tr>
 			<tr>
-			<td colspan="4" style="height:40px;">${vo2.board01_content}</td>
+			<td colspan="4" style="height:40px;">
+			<div style="white-space:pre;"><c:out value="${vo2.board01_content}" /></div>
+			</td>
+			
 			</tr>
 		</tbody>
 	</table>
@@ -191,7 +194,8 @@
 				 </script>
 			</tr>
 			<tr>
-			<td colspan="3">${repList.reply01_content}</td>
+			
+			<td colspan="3"><div style="white-space:pre;"><c:out value="${repList.reply01_content}" /></div></td>
 			</tr>			
 		</tbody>
 			

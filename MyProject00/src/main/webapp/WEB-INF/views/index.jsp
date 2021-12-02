@@ -62,7 +62,7 @@
 <!-- alert 출력 부분 끝 -->
 <table class="table">
 	<tr>
-		<td width="50%">
+		<td width="50%" rowspan="2">
 		<img class="img-responsive" alt="Responsive image" src="resources/img/image.jpg">
 		</td>
 		<td width="50%">
@@ -94,6 +94,35 @@
 						<td>${vo.board01_viewcnt}</td>
 						<td><fmt:formatDate value="${vo.board01_regdate}"
 								pattern="yyyy-MM-dd" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		</div>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td width="50%">
+		<div class="panel panel-info">
+		<div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><b>  우수 활동 유저</b></div>
+		<div class="panel-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="cols" width="40%">프로필 이미지</th>
+					<th scope="cols" width="30%">닉네임</th>
+					<th scope="cols" width="30%">포인트</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="vo" items="${list2}">
+
+					<tr>
+						<td><img width="75px"
+							src="resources/uploadimg/${vo.member_img}" class="img-thumbnail"></td>
+						<td>${vo.member_nickname}</td>
+						<td>${vo.member_point}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

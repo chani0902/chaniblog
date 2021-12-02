@@ -132,4 +132,10 @@
 		update board01 b set b.reply_cnt = (select count(reply01_num) from reply01 where board01_num = #{board01_num}) where b.board01_num = #{board01_num}
 	</update>
 	
+	<select id="RP_MINE"
+		resultType="com.test.myproject.board01.model.Board01VO">
+		select writercheck from board01 where
+		board01_num = #{board01_num}
+	</select>
+	
 </mapper>

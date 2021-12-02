@@ -31,5 +31,9 @@ public interface MemberDAO {
 	public int GetKey(String member_id, String key);
 	
 	public int alter_userKey(String member_id, String key);
+	
+	public int POINT_POST(String member_id, String point);
+	
+	public List<MemberVO> hotuser();
 
 }

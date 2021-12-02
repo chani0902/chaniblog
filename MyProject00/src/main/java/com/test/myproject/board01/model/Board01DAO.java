@@ -37,5 +37,7 @@ public interface Board01DAO {
 //	댓글 갯수 체크
 	public int reply_cnt(int board01_num);
 	
+//	댓글 다는 게시글이 본인글인지 체크
+	public Board01VO rp_mine(int board01_num);
 	
 }

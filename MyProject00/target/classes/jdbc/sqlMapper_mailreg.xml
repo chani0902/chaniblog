@@ -17,6 +17,11 @@
 	<update id="alter_userKey" parameterType="Map">
 		update member set AUTHSTATUS = 1 where member_id = #{param1} and authkey = #{param2}
 	</update>
+	
+	<!-- 글 작성시 포인트 증가 -->
+	<update id="POINT_POST" parameterType="Map">
+		update member set member_point = member_point + #{param2} where member_id = #{param1}
+	</update>
 
 	
 </mapper>

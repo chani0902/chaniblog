@@ -46,6 +46,10 @@
 				<td>${vo2.member_email}</td>	
 			</tr>
 			<tr>
+				<th scope="cols">포인트</th>
+				<td>${vo2.member_point}</td>	
+			</tr>
+			<tr>
 				<th scope="cols">프로필 이미지</th>
 				<td><img width = 50px src="resources/uploadimg/${vo2.member_img}" class="img-thumbnail"></td>	
 			</tr>

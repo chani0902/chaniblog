@@ -10,15 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.myproject.board01.model.Board01VO;
@@ -26,6 +29,8 @@ import com.test.myproject.board01.model.Criteria;
 import com.test.myproject.board01.model.PageMaker;
 import com.test.myproject.board01.model.SearchCriteria;
 import com.test.myproject.board01.service.Board01Service;
+import com.test.myproject.member.model.MemberDAO;
+import com.test.myproject.member.service.MemberService;
 import com.test.myproject.reply01.model.Reply01VO;
 import com.test.myproject.reply01.service.Reply01Service;
 
@@ -42,10 +47,14 @@ public class Board01Controller {
 	Reply01Service r01s;
 	
 	@Autowired
+	MemberService m01s;
+	
+	@Autowired
 	ServletContext sContext;
 	
 	@Autowired
 	HttpSession session;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws Exception 
@@ -167,10 +176,20 @@ public class Board01Controller {
 	}
 	
 	@RequestMapping(value = "/rp_insert.do" , method = RequestMethod.POST)
-	public String rp_insert(Reply01VO vo, SearchCriteria scri, RedirectAttributes rttr) {
+	public String rp_insert(Board01VO bvo, Reply01VO vo, SearchCriteria scri, RedirectAttributes rttr) {
 		logger.info("vo : {}", vo);
 		int result = 0;
 		result = r01s.insert(vo);
+		
+//		자기 글에 다는 댓글인지 확인하는 부분 (자기의 글이면 포인트 증가는 안하게)
+		Board01VO bvo2 = b01s.rp_mine(vo.getBoard01_num());
+		logger.info("rp_mine : " +bvo2.getWritercheck());
+		if (!bvo2.getWritercheck().equals((String)session.getAttribute("member_id"))) {
+//			댓글 작성시 포인트 증가 부분
+			String member_id = (String)session.getAttribute("member_id");
+			String point = "2";
+			m01s.POINT_POST(member_id, point);
+		}
 		
 		rttr.addAttribute("board01_num", vo.getBoard01_num());
 		rttr.addAttribute("page", scri.getPage());
@@ -238,16 +257,27 @@ public class Board01Controller {
 	@RequestMapping(value = "/r01_deleteOK.do", method = RequestMethod.POST)
 	public String r01_deleteOK(Reply01VO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 	 logger.info("/r01_deleteOK.do");
+	 Reply01VO vo2 = r01s.selectOne(vo.getReply01_num());
+	 logger.info("rp_delete vo2 : " + vo2);
 	 
 	 int result = 0;
 	 result = r01s.delete(vo);
+	 
+//	 자기글에 댓글 삭제시 포인트 감소 없게
+	 Board01VO bvo2 = b01s.rp_mine(vo2.getBoard01_num());
+	 logger.info("rp_mine : " +bvo2.getWritercheck());
+	 
+		if (!bvo2.getWritercheck().equals(vo2.getWritercheck())) {
+			String point = "-2";
+			m01s.POINT_POST(vo2.getWritercheck(), point);
+		}
+ 
 	 
 	 rttr.addAttribute("board01_num", vo.getBoard01_num());
 	 rttr.addAttribute("page", scri.getPage());
 	 rttr.addAttribute("perPageNum", scri.getPerPageNum());
 	 rttr.addAttribute("searchKey", scri.getSearchKey());
 	 rttr.addAttribute("searchWord", scri.getSearchWord());
-	 
 	 logger.info("rp_delete_result : {}", result);
 	 
 	 if(result == 1) {
@@ -268,10 +298,11 @@ public class Board01Controller {
 	}
 	
 	@RequestMapping(value = "/b01_insertOK.do" , method = RequestMethod.POST)
-	public String b01_insertOK(Board01VO vo) throws IllegalStateException, IOException {
+	public String b01_insertOK(Board01VO vo, RedirectAttributes rttr) throws IllegalStateException, IOException {
 		logger.info("Welcome b01_insertOK!");
 		logger.info("vo : {}", vo);
 		
+//		세션에서 아이디를 받아와서 작성자를 확인함
 		String writercheck = (String) session.getAttribute("member_id");
 		
 		int result = 0;
@@ -300,8 +331,18 @@ public class Board01Controller {
 		result = b01s.insert(vo);
 		logger.info("result : " + result);
 		
+//		포인트 증가 부분 (세션에서 아이디를 받아다가 집어넣어줌)
+		if (vo.getBoard01_content().length() > 50) {
+			String point = "15";
+			m01s.POINT_POST(writercheck, point);
+//			50자 이상 적으면 15포인트 증가
+		} else {
+			String point = "10";
+			m01s.POINT_POST(writercheck, point);
+		}
 		
 		if(result == 1) {
+			rttr.addFlashAttribute("msg", "글 작성 성공");
 			return "redirect:b01_listsearch.do";
 		} else {
 			return "redirect:b01_insert.do";
@@ -379,9 +420,19 @@ public class Board01Controller {
 	public String b01_deleteOK(@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, Board01VO vo, Model model) {
 		logger.info("Welcome b01_deleteOK!");
 		logger.info("vo : " + vo);
-		
+		Board01VO vo2 = b01s.selectOne(vo);
 		
 		int result3 = b01s.delete(vo);
+		
+//		글 작성 포인트 삭제 부분
+		if (vo2.getBoard01_content().length() > 50) {
+			String point = "-15";
+			m01s.POINT_POST(vo2.getWritercheck(), point);
+		} else {
+			String point = "-10";
+			m01s.POINT_POST(vo2.getWritercheck(), point);
+		}
+		
 		model.addAttribute("scri", scri);
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());

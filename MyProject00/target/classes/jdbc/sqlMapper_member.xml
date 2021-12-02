@@ -28,28 +28,28 @@
 	<select id="MV_SELECT_ONE"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS from member
+		member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS, member_point from member
 		where member_id = #{member_id}
 	</select>
 
 	<select id="MV_SELECT_ALL"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img from member
+		member_email, nvl(member_img,'default.jpg') member_img, member_point from member
 		order by member_num desc
 	</select>
 
 	<select id="MV_SEARCH_LIST_NICKNAME"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img from member
+		member_email, nvl(member_img,'default.jpg') member_img, member_point from member
 		where member_nickname like #{searchWord}
 	</select>
 
 	<select id="MV_SEARCH_LIST_ID"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img from member
+		member_email, nvl(member_img,'default.jpg') member_img, member_point from member
 		where member_id like #{searchWord}
 	</select>
 
@@ -100,6 +100,16 @@
 		update member set member_pw = #{member_pw}
 		where member_id = #{member_id}
 	</update>
+	
+	<!-- 포인트 높은 순으로 정렬 -->
+	<select id="MV_HOT_USER"
+		resultType="com.test.myproject.member.model.MemberVO">
+		select nvl(member_img,'default.jpg') member_img, member_nickname,
+		member_point from (select nvl(member_img,'default.jpg') member_img, member_nickname,
+		member_point, row_number() over(order by member_point desc) as rNum
+		from member) where rNum between 1 and 5 order by member_point desc
+	</select>
+	
 
 	
 </mapper>

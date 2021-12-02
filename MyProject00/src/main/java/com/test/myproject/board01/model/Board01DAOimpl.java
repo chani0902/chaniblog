@@ -127,4 +127,10 @@ public class Board01DAOimpl implements Board01DAO {
 		return sqlSession.update("B01_REPLYCNT", board01_num);
 	}
 
+	@Override
+	public Board01VO rp_mine(int board01_num) {
+		logger.info("rp_mine : " + board01_num);
+		return sqlSession.selectOne("RP_MINE", board01_num);
+	}
+
 }
