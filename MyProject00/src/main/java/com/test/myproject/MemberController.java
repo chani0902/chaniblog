@@ -108,6 +108,7 @@ public class MemberController {
 				
 		return "member/insert";
 	}
+	
 //	회원 가입 post
 	@RequestMapping(value = "/mv_insertOK.do" , method = RequestMethod.POST)
 	public String mv_insertOK(@ModelAttribute MemberVO vo, RedirectAttributes rttr, HttpServletRequest request) throws IllegalStateException, IOException {
@@ -165,7 +166,6 @@ public class MemberController {
 
 		return "member/welcome";
 	}
-	
 	
 
 //	비밀번호 찾기 메일을 통해 접속하는 페이지
