@@ -48,28 +48,20 @@
 	</form>
 
 	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th scope="cols">글 번호</th>
-				<th scope="cols">작성자</th>
-				
-				<th scope="cols">조회수</th>
-				<th scope="cols">작성일</th>
-			</tr>
-		</thead>
+		
 		<tbody>
 
-			<tr>
-				<td>${vo2.board01_num}</td>
-				<td>${vo2.board01_writer}</td>
+			<tr class="active">
+				<td width="15%"><b>글 번호</b>&emsp;${vo2.board01_num}</td>
+				<td><b>작성자</b>&emsp;${vo2.board01_writer}</td>
 				
-				<td >${vo2.board01_viewcnt}</td>
+				<td width="15%"><b>조회수</b>&emsp;${vo2.board01_viewcnt}</td>
 				
-				<td><fmt:formatDate value="${vo2.board01_regdate}"
+				<td width="30%"><b>작성일</b>&emsp;<fmt:formatDate value="${vo2.board01_regdate}"
 						pattern="yyyy-MM-dd HH:mm:ss" /></td>
 			</tr>
 			<tr>
-			<td colspan="4" style="height:40px;">
+			<td colspan="4" style="height:150px;">
 			<div style="white-space:pre;"><c:out value="${vo2.board01_content}" /></div>
 			</td>
 			

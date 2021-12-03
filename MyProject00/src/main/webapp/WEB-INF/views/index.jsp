@@ -35,7 +35,7 @@
 <c:if test="${member != null}">
 	<div class="page-header">
 		<h1>
-			My Project <small>Community site :D   Have fun! [${member.member_nickname}]</small>
+			My Project <small>Community site :D   Have fun! [${member_nickname}]</small>
 		</h1>
 	</div>
 </c:if>

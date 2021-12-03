@@ -29,8 +29,15 @@
 	
 <!-- 	update.jsp에서  숨겨진 input으로 번호, 아이디, 이미지 이름까지 주고 이미지 파일 업로드에 기본값을 이미 설정된 이미지로 주고
 		컨트롤러에서 updateOK 부분에 파일을 넣지 않더라도 update가 진행되게 설정하니 모든 문제가 해결되었다-->
-	
 	<form action="mv_updateOK.do" method="post" enctype="multipart/form-data">
+	<div class="panel panel-success">
+  
+ 	 <div class="panel-heading"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><b>&emsp;회원 정보 수정</b></div>
+ 	 <div class="panel-body">
+ 	 	<p>비밀번호 변경을 원하시면 새로운 비밀번호를 입력해주세요!</p>
+ 	 </div>
+	
+	
 		<input type="hidden" name="member_num" value="${vo2.member_num}" >
 		<input type="hidden" name="member_id" value="${vo2.member_id}" >
 		<input type="hidden" name="member_email" value="${vo2.member_email}" >
@@ -65,9 +72,14 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 		<input type="submit" id="udsubmit" value="수정 완료" class="btn btn-success" disabled="disabled">
 		<a href="mv_delete.do?member_id=${vo2.member_id}" class="btn btn-danger">회원 탈퇴</a>
 	</form>
+	
+	
+	
+	
 	<!-- 비밀번호를 새로 입력해야 수정 완료를 클릭할 수 있게 함 -->
 	<script type="text/javascript">
 		$(function(){

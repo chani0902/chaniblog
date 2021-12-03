@@ -1,7 +1,9 @@
 package com.test.myproject.member.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MemberVO implements Serializable {
@@ -17,6 +19,9 @@ public class MemberVO implements Serializable {
 		private String authKey;
 		private int authStatus;
 		private int member_point;
+		@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+		private Date member_regdate;
+		
 		
 		public int getMember_num() {
 			return member_num;
@@ -78,6 +83,12 @@ public class MemberVO implements Serializable {
 		public void setMember_point(int member_point) {
 			this.member_point = member_point;
 		}
+		public Date getMember_regdate() {
+			return member_regdate;
+		}
+		public void setMember_regdate(Date member_regdate) {
+			this.member_regdate = member_regdate;
+		}
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -91,6 +102,7 @@ public class MemberVO implements Serializable {
 			result = prime * result + member_num;
 			result = prime * result + member_point;
 			result = prime * result + ((member_pw == null) ? 0 : member_pw.hashCode());
+			result = prime * result + ((member_regdate == null) ? 0 : member_regdate.hashCode());
 			result = prime * result + ((multipartFile == null) ? 0 : multipartFile.hashCode());
 			return result;
 		}
@@ -139,6 +151,11 @@ public class MemberVO implements Serializable {
 					return false;
 			} else if (!member_pw.equals(other.member_pw))
 				return false;
+			if (member_regdate == null) {
+				if (other.member_regdate != null)
+					return false;
+			} else if (!member_regdate.equals(other.member_regdate))
+				return false;
 			if (multipartFile == null) {
 				if (other.multipartFile != null)
 					return false;
@@ -151,9 +168,7 @@ public class MemberVO implements Serializable {
 			return "MemberVO [member_num=" + member_num + ", member_id=" + member_id + ", member_pw=" + member_pw
 					+ ", member_nickname=" + member_nickname + ", member_email=" + member_email + ", member_img="
 					+ member_img + ", multipartFile=" + multipartFile + ", authKey=" + authKey + ", authStatus="
-					+ authStatus + ", member_point=" + member_point + "]";
+					+ authStatus + ", member_point=" + member_point + ", member_regdate=" + member_regdate + "]";
 		}
-		
-		
-	
+			
 } // end class

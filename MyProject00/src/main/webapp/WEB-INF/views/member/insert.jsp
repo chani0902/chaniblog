@@ -105,7 +105,7 @@
 			</tr>
 			<tr>
 				<th scope="cols">프로필 이미지</th>
-				<td><input type="file" class="form-control-file" name="multipartFile" value="" ></td>
+				<td><input type="file" class="form-control-file" name="multipartFile" value="" ><small>[가로 제한 길이: 150px, 세로 제한 길이: 150px] 로 변경되어 저장됩니다. 참고하여 이미지를 등록해주세요.</small></td>
 			</tr>
 		</tbody>
 	</table>

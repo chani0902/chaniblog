@@ -28,28 +28,28 @@
 	<select id="MV_SELECT_ONE"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS, member_point from member
+		member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS, member_point, member_regdate from member
 		where member_id = #{member_id}
 	</select>
 
 	<select id="MV_SELECT_ALL"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img, member_point from member
+		member_email, nvl(member_img,'default.jpg') member_img, member_point, member_regdate from member
 		order by member_num desc
 	</select>
 
 	<select id="MV_SEARCH_LIST_NICKNAME"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img, member_point from member
+		member_email, nvl(member_img,'default.jpg') member_img, member_point, member_regdate from member
 		where member_nickname like #{searchWord}
 	</select>
 
 	<select id="MV_SEARCH_LIST_ID"
 		resultType="com.test.myproject.member.model.MemberVO">
 		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img, member_point from member
+		member_email, nvl(member_img,'default.jpg') member_img, member_point, member_regdate from member
 		where member_id like #{searchWord}
 	</select>
 
@@ -77,7 +77,7 @@
 	<!-- 로그인 - 암호화 적용 -->
 	<select id="loginBcrypt" resultType="com.test.myproject.member.model.MemberVO">
 		select
-		member_num, member_id, member_pw, member_nickname, member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS 
+		member_num, member_id, member_pw, member_nickname, member_email, nvl(member_img,'default.jpg') member_img, authkey, AUTHSTATUS, member_point 
 		from member where member_id = #{member_id}
 	</select>
 	

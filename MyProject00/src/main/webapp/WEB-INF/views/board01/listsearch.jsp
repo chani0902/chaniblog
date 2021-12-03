@@ -35,7 +35,7 @@
 
 		<table class="table table-hover">
 			<thead>
-				<tr>
+				<tr class="success">
 					<th scope="cols">글 번호</th>
 					<th scope="cols">제목</th>
 					<th scope="cols">작성자</th>

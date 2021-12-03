@@ -39,9 +39,9 @@
 			value="${scri.searchKey}" readonly="readonly"> <input
 			type="hidden" id="searchWord" name="searchWord"
 			value="${scri.searchWord}" readonly="readonly">
-		<table class="table table-bordered">
+		<table class="table">
 		<thead>
-			<tr>
+			<tr class="active">
 				<th scope="cols">글 번호</th>
 				<th scope="cols">제목</th>
 				<th scope="cols">작성자</th>
@@ -57,7 +57,7 @@
 				<td>${vo2.board01_viewcnt}</td>
 			</tr>
 			<tr>
-			<td colspan="4"><textarea class="form-control" rows="5" cols="100%" name="board01_content">${vo2.board01_content}</textarea></td>
+			<td colspan="4"><textarea class="form-control" rows="15" cols="100%" name="board01_content">${vo2.board01_content}</textarea></td>
 			</tr>
 		</tbody>
 	</table>

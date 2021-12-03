@@ -41,7 +41,7 @@
 			</tr>
 			<tr>
 				<th scope="cols">내용</th>
-				<td><textarea class="form-control" placeholder="내용을 입력하세요" rows="5" cols="50" name="board01_content">dummy_content</textarea></td>
+				<td><textarea class="form-control" placeholder="내용을 입력하세요" rows="15" cols="100%" name="board01_content">dummy_content</textarea></td>
 			</tr>
 		</tbody>
 	</table>

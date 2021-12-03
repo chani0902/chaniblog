@@ -129,9 +129,9 @@ public class MemberController {
 			
 		//// create thumbnail image/////////
 	         BufferedImage original_buffer_img = ImageIO.read(f); 
-	         BufferedImage thumb_buffer_img = new BufferedImage(50, 50, BufferedImage.TYPE_3BYTE_BGR);
+	         BufferedImage thumb_buffer_img = new BufferedImage(150, 150, BufferedImage.TYPE_3BYTE_BGR);
 	         Graphics2D graphic = thumb_buffer_img.createGraphics();
-	         graphic.drawImage(original_buffer_img, 0, 0, 50, 50, null); 
+	         graphic.drawImage(original_buffer_img, 0, 0, 150, 150, null); 
 
 	         File thumb_file = new File(realPath + "/thumb_" + vo.getMember_img()); 
 	         ImageIO.write(thumb_buffer_img, "jpg", thumb_file);
@@ -253,6 +253,7 @@ public class MemberController {
 		
 		if(result2 == 1) {
 			rttr.addFlashAttribute("msg", true);
+			session.setAttribute("member_nickname", vo.getMember_nickname());
 			return "redirect:mv_selectOne.do?member_id=" + vo.getMember_id();
 		} else {
 			logger.info("result2 : {}", result2);
