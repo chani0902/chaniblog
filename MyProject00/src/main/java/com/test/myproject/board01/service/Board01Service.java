@@ -11,6 +11,7 @@ import com.test.myproject.board01.model.Board01DAO;
 import com.test.myproject.board01.model.Board01VO;
 import com.test.myproject.board01.model.Criteria;
 import com.test.myproject.board01.model.SearchCriteria;
+import com.test.myproject.reply01.model.Reply01VO;
 
 @Service
 public class Board01Service {
@@ -87,6 +88,11 @@ public class Board01Service {
 	public Board01VO rp_mine(int board01_num) {
 		
 		return dao.rp_mine(board01_num);
+	}
+	
+	public List<Board01VO> my_post(String writercheck) {
+		// TODO Auto-generated method stub
+		return dao.my_post(writercheck);
 	}
 	
 } // end class

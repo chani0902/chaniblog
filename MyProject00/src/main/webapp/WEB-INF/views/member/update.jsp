@@ -32,7 +32,7 @@
 	<form action="mv_updateOK.do" method="post" enctype="multipart/form-data">
 	<div class="panel panel-success">
   
- 	 <div class="panel-heading"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><b>&emsp;회원 정보 수정</b></div>
+ 	 <div class="panel-heading"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><b>&emsp;회원 정보 수정</b></div>
  	 <div class="panel-body">
  	 	<p>비밀번호 변경을 원하시면 새로운 비밀번호를 입력해주세요!</p>
  	 </div>
@@ -73,8 +73,11 @@
 		</tbody>
 	</table>
 	</div>
-		<input type="submit" id="udsubmit" value="수정 완료" class="btn btn-success" disabled="disabled">
-		<a href="mv_delete.do?member_id=${vo2.member_id}" class="btn btn-danger">회원 탈퇴</a>
+		<button type="submit" id="udsubmit" class="btn btn-success" disabled="disabled"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+		&nbsp;수정 완료</button>
+		<a href="mv_delete.do?member_id=${vo2.member_id}" class="btn btn-danger">
+		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		&nbsp;회원 탈퇴</a>
 	</form>
 	
 	
@@ -94,5 +97,7 @@
 	</script>
 	
 </div>
+<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

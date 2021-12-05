@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.test.myproject.reply01.model.Reply01VO;
+
 @Repository
 public class Board01DAOimpl implements Board01DAO {
 	
@@ -132,5 +134,15 @@ public class Board01DAOimpl implements Board01DAO {
 		logger.info("rp_mine : " + board01_num);
 		return sqlSession.selectOne("RP_MINE", board01_num);
 	}
+
+	@Override
+	public List<Board01VO> my_post(String writercheck) {
+		logger.info("my_post() : " + writercheck);
+		List<Board01VO> list = sqlSession.selectList("MY_POST", writercheck);
+		
+		return list;
+	}
+
+	
 
 }

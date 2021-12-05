@@ -11,10 +11,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.test.myproject.board01.model.Board01VO;
+import com.test.myproject.board01.service.Board01Service;
 import com.test.myproject.member.model.MemberVO;
 import com.test.myproject.member.service.MailSendService;
 import com.test.myproject.member.service.MemberService;
+import com.test.myproject.reply01.model.Reply01VO;
+import com.test.myproject.reply01.service.Reply01Service;
 
 /**
  * Handles requests for the application home page.
@@ -42,6 +46,12 @@ public class MemberController {
 	
 	@Autowired
 	MemberService ms;
+	
+	@Autowired
+	Board01Service b01s;
+	
+	@Autowired
+	Reply01Service r01s;
 	
 //	패스워드 암호화
 	@Autowired
@@ -88,11 +98,22 @@ public class MemberController {
 		return "member/selectAll";
 	}
 	
+	
 	@RequestMapping(value = "/mv_selectOne.do" , method = RequestMethod.GET)
 	public String mv_selectOne(Model model, MemberVO vo) {
 		logger.info("Welcome mv_selectOne!");
 		
 		MemberVO vo2 = ms.selectOne(vo);
+		
+//		본인 작성 글 목록보기 (ajax로 하려다 실패해서 이렇게 함 ㅠㅠ)
+		String writercheck = vo.getMember_id();
+		List<Board01VO> list2 = b01s.my_post(writercheck);	
+		model.addAttribute("list2", list2);
+
+//		본인 작성 댓글 목록보기
+		List<Reply01VO> list3 = r01s.my_comment(writercheck);
+		model.addAttribute("list3", list3);
+		
 		
 		model.addAttribute("vo2", vo2);
 		
@@ -100,6 +121,7 @@ public class MemberController {
 		
 		return "member/selectOne";
 	}
+	
 	
 	@RequestMapping(value = "/mv_insert.do" , method = RequestMethod.GET)
 	public String mv_insert() {

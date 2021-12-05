@@ -2,6 +2,8 @@ package com.test.myproject.board01.model;
 
 import java.util.List;
 
+import com.test.myproject.reply01.model.Reply01VO;
+
 public interface Board01DAO {
 	
 	public int insert(Board01VO vo);
@@ -40,4 +42,8 @@ public interface Board01DAO {
 //	댓글 다는 게시글이 본인글인지 체크
 	public Board01VO rp_mine(int board01_num);
 	
+//  회원 본인 작성 글 목록
+	public List<Board01VO> my_post(String writercheck);
+	
+
 }

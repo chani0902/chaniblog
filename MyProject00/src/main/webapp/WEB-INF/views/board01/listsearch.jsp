@@ -31,7 +31,9 @@
 			</h1>
 		</div>
 		
-		<a href="b01_insert.do" class="btn btn-info pull-right">새 글 쓰기</a>
+		<a href="b01_insert.do" class="btn btn-info pull-right">
+		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+		&nbsp;새 글 쓰기</a>
 
 		<table class="table table-hover">
 			<thead>
@@ -87,7 +89,9 @@
 					<input type="text" name="searchWord" id="keywordInput"
 						value="${scri.searchWord}" class="form-control" /> <span
 						class="input-group-btn">
-						<button id="searchBtn" class="btn btn-default">검색</button>
+						<button id="searchBtn" class="btn btn-default">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						&nbsp;검색</button>						
 					</span>
 				</div>
 			</div>

@@ -47,5 +47,14 @@
 		delete from reply01
 		where reply01_num = #{reply01_num} 
 	</delete>
-
+	
+	<!-- 회원 자신이 작성한 댓글 검색 -->
+	<select id="MY_COMMENT"
+	resultType="com.test.myproject.reply01.model.Reply01VO">
+		select board01_num, reply01_num, reply01_content,
+		reply01_writer,
+		reply01_regdate, writercheck from reply01 where
+		writercheck =
+		#{writercheck} order by reply01_regdate desc
+	</select>
 </mapper>

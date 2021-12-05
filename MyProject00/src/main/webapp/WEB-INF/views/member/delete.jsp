@@ -35,9 +35,14 @@
 	<br>
 	
 	<br>
-	<a href="mv_deleteOK.do?member_id=${param.member_id}" class="btn btn-danger">탈퇴</a>
-	<a href="mv_selectOne.do?member_id=${param.member_id}" class="btn btn-primary">취소</a>
+	<a href="mv_deleteOK.do?member_id=${param.member_id}" class="btn btn-danger">
+	<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+	&nbsp;탈퇴</a>
+	<a href="mv_selectOne.do?member_id=${param.member_id}" class="btn btn-primary">
+	<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+	&nbsp;취소</a>
 	</div>
-
+<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

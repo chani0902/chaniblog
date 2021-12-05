@@ -43,9 +43,13 @@
 	<h4>정말 삭제하시겠습니까?<br><br><small>삭제된 글은 복구할 수 없습니다</small></h4>
 	<br>
 	<br>
-	<button type="submit" class="btn btn-danger">삭제</button>
-	<a href="/myproject/b01_selectOne.do?board01_num=${vo2.board01_num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchKey=${scri.searchKey}&searchWord=${scri.searchWord}" class="btn btn-primary">취소</a>
+	<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+	&nbsp;삭제</button>
+	<a href="/myproject/b01_selectOne.do?board01_num=${vo2.board01_num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchKey=${scri.searchKey}&searchWord=${scri.searchWord}" class="btn btn-primary">
+	<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>&nbsp;취소</a>
 	</form>
-</div>	
+</div>
+<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>	
 </body>
 </html>

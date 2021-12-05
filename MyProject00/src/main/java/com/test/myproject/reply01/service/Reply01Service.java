@@ -42,4 +42,9 @@ public class Reply01Service {
 		return dao.delete(vo);
 	}
 	
+	public List<Reply01VO> my_comment(String writercheck) {
+		// TODO Auto-generated method stub
+		return dao.my_comment(writercheck);
+	}
+	
 }

@@ -31,6 +31,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
+				<value>classpath:jdbc/sqlMapper_board00.xml</value>
 				<value>classpath:jdbc/sqlMapper_board01.xml</value>
 				<value>classpath:jdbc/sqlMapper_member.xml</value>
 				<value>classpath:jdbc/sqlMapper_reply01.xml</value>

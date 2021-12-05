@@ -61,5 +61,13 @@ public class Reply01DAOimpl implements Reply01DAO {
 		logger.info("r01_delete flag : " + flag);
 		return flag;
 	}
+	
+	@Override
+	public List<Reply01VO> my_comment(String writercheck) {
+		logger.info("my_comment() : " + writercheck);
+		List<Reply01VO> list = sqlSession.selectList("MY_COMMENT", writercheck);
+		
+		return list;
+	}
 
 }

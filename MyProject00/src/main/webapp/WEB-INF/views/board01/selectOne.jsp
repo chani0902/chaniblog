@@ -68,16 +68,20 @@
 			</tr>
 		</tbody>
 	</table>
-		<button id="list_btn" class="btn btn-primary btn-space">목록</button>
+		<button id="list_btn" class="btn btn-primary btn-space">
+		<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;목록</button>
 
 	<c:choose>
 		<c:when test="${sessionScope.member_id == vo2.writercheck}">
-			<button id="modity_btn" class="btn btn-warning btn-space">수정</button>
- 			<button id="delete_btn" class="btn btn-danger btn-space">삭제</button>
+			<button id="modity_btn" class="btn btn-warning btn-space">
+			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;수정</button>
+ 			<button id="delete_btn" class="btn btn-danger btn-space">
+ 			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;삭제</button>
 		</c:when>
 
 		<c:when test="${sessionScope.member_id == 'admin'}">
-			<button id="delete_btn" class="btn btn-danger btn-space">삭제</button>
+			<button id="delete_btn" class="btn btn-danger btn-space">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;삭제</button>
 		</c:when>
 	
 	</c:choose>
@@ -152,12 +156,15 @@
 					<td>
 			<c:choose>
 						<c:when test="${sessionScope.member_id == repList.writercheck}">
-							<a role="button" id="rpupdate" class="btn btn-warning btn-space btn-xs" data-reply01_num="${repList.reply01_num}">수정</a>
- 							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">삭제</button>
+							<a role="button" id="rpupdate" class="btn btn-warning btn-space btn-xs" data-reply01_num="${repList.reply01_num}">
+							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;수정</a>
+ 							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">
+ 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;삭제</button>
 						</c:when>
 
 						<c:when test="${sessionScope.member_id == 'admin'}">
-							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">삭제</button>
+							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;삭제</button>
 						</c:when>
 					</c:choose>
 			</td>
@@ -211,7 +218,8 @@
 	<label for="reply01_writer">작성자</label><input type="text" id="reply01_writer" name="reply01_writer" class="form-control" value="${sessionScope.member_nickname}" readonly="readonly"/><p></p>
  	<p><label for="reply01_content">댓글 내용</label><textarea id="reply01_content" name="reply01_content" placeholder="댓글 내용을 입력하세요" class="form-control" rows="3"></textarea></p>
  	<p>
-	<button type="button" class="repSubmit btn btn-success">작성</button>
+	<button type="button" class="repSubmit btn btn-success">
+	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;작성</button>
 	<script>
   var formObj = $(".replyForm form[role='form']");
         
@@ -253,5 +261,7 @@
 			</c:when>
 
 		</c:choose>
+		<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

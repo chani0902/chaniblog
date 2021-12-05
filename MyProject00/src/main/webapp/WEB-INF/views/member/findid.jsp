@@ -85,6 +85,8 @@ $("#member_email").keyup(function(){
 		$(".findid").removeAttr("disabled");
 });
 </script>
+<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 
 </html>

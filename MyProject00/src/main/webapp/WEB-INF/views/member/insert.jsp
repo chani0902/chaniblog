@@ -109,7 +109,9 @@
 			</tr>
 		</tbody>
 	</table>
-		<input type="submit" id="submit" value="입력 완료" class="btn btn-success" disabled="disabled">
+		<button type="submit" id="submit" class="btn btn-success" disabled="disabled">
+		<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+		&nbsp;입력 완료</button>
 	</form>
 	
 	
@@ -174,6 +176,7 @@ $(".mailcheck").click(function(){
 		$("#submit").attr("disabled", "disabled");
 	}); 
 </script>
-
+<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

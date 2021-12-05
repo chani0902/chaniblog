@@ -45,9 +45,12 @@
 			</tr>
 		</tbody>
 	</table>
-		<input type="submit" value="입력 완료" class="btn btn-success">
+		<button type="submit" class="btn btn-success">
+		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;입력 완료</button>
 	</form>
 
 </div>
+<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

@@ -62,10 +62,12 @@
 		</tbody>
 	</table>
 	
-		<button type="submit" class="btn btn-success">수정</button> <a href="/myproject/b01_selectOne.do?board01_num=${vo2.board01_num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchKey=${scri.searchKey}&searchWord=${scri.searchWord}" class="btn btn-primary">취소</a>
+		<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;수정</button> <a href="/myproject/b01_selectOne.do?board01_num=${vo2.board01_num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchKey=${scri.searchKey}&searchWord=${scri.searchWord}" class="btn btn-primary"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>&nbsp;취소</a>
 
    
 	</form>
 </div>	
+<!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

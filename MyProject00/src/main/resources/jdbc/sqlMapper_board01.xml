@@ -132,10 +132,20 @@
 		update board01 b set b.reply_cnt = (select count(reply01_num) from reply01 where board01_num = #{board01_num}) where b.board01_num = #{board01_num}
 	</update>
 	
+	<!-- 글 작성자가 단 댓글인지 확인 -->
 	<select id="RP_MINE"
 		resultType="com.test.myproject.board01.model.Board01VO">
 		select writercheck from board01 where
 		board01_num = #{board01_num}
 	</select>
+	
+	<!-- 회원 자신이 작성한 글 검색 -->
+	<select id="MY_POST"
+	resultType="com.test.myproject.board01.model.Board01VO">
+		select board01_num, board01_title, board01_writer,
+		board01_viewcnt, board01_regdate, writercheck, reply_cnt from board01 where
+		writercheck = #{writercheck} order by board01_regdate desc
+	</select>
+	
 	
 </mapper>

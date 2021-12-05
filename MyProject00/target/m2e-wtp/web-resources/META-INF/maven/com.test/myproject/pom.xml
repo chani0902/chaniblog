@@ -190,6 +190,13 @@
 			<version>1.9.13</version>
 		</dependency>
 
+		<!-- JSON -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180813</version>
+		</dependency>
+
 		<!-- Commons Fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>

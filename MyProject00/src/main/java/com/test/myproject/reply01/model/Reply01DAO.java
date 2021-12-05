@@ -18,5 +18,8 @@ public interface Reply01DAO {
 	
 //	댓글 삭제
 	public int delete(Reply01VO vo);
+	
+//	회원 본인 작성 댓글 목록
+	public List<Reply01VO> my_comment(String writercheck);
 
 }

@@ -3,25 +3,23 @@ package com.test.myproject;
 import java.io.IOException;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.mybatis.spring.SqlSessionTemplate;
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.SessionScope;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.myproject.board01.model.Board01VO;
@@ -29,7 +27,6 @@ import com.test.myproject.board01.model.Criteria;
 import com.test.myproject.board01.model.PageMaker;
 import com.test.myproject.board01.model.SearchCriteria;
 import com.test.myproject.board01.service.Board01Service;
-import com.test.myproject.member.model.MemberDAO;
 import com.test.myproject.member.service.MemberService;
 import com.test.myproject.reply01.model.Reply01VO;
 import com.test.myproject.reply01.service.Reply01Service;
@@ -173,6 +170,23 @@ public class Board01Controller {
 		logger.info("vo2 : {}", vo2);
 		
 		return "board01/selectOne";
+	}
+	
+	
+	@RequestMapping(value = "/MY_POST.do" , method = RequestMethod.GET)
+	public  JSONArray MY_POST(HttpServletResponse response, HttpServletRequest request, @ModelAttribute("scri") SearchCriteria scri, Model model, Board01VO vo) throws Exception {
+		logger.info("Welcome MY_POST!");
+		
+		String writercheck = request.getParameter("writercheck");
+				
+		List<Board01VO> list2 = b01s.my_post(writercheck);	
+		System.out.println(list2);
+		model.addAttribute(list2);
+		
+		JSONArray jarr = new JSONArray(list2);
+		System.out.println(jarr);
+		
+		return jarr;
 	}
 	
 	@RequestMapping(value = "/rp_insert.do" , method = RequestMethod.POST)

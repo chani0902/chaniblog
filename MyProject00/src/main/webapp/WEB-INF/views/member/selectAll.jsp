@@ -77,5 +77,7 @@
 	 <c:if test="${msg == '회원 강퇴 성공'}">
  	<script>alert("성공적으로 탈퇴시켰습니다!");</script>
  </c:if>
+ <!-- footer -->
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
