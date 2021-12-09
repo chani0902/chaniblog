@@ -139,12 +139,15 @@
 					<td>
 			<c:choose>
 						<c:when test="${sessionScope.member_id == repList.writercheck}">
-							<a role="button" id="rpupdate" class="btn btn-warning btn-space btn-xs" data-reply01_num="${repList.reply01_num}">수정</a>
- 							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">삭제</button>
+							<a role="button" id="rpupdate" class="btn btn-warning btn-space btn-xs" data-reply01_num="${repList.reply01_num}">
+							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;수정</a>
+ 							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">
+ 							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;삭제</button>
 						</c:when>
 
 						<c:when test="${sessionScope.member_id == 'admin'}">
-							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">삭제</button>
+							<button id="rpdelete" class="btn btn-danger btn-space btn-xs" data-reply01_num="${repList.reply01_num}">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;삭제</button>
 						</c:when>
 					</c:choose>
 			</td>

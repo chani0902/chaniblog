@@ -68,6 +68,20 @@ public class Board01Controller {
 		
 	}
 	
+	
+	@RequestMapping(value = "/json_b01_selectAll.do" , method = RequestMethod.GET)
+	@ResponseBody
+	public List<Board01VO> json_b01_selectAll(Model model) throws Exception {
+		logger.info("Welcome json_b01_selectAll!");
+		
+		List<Board01VO> list = b01s.selectAll();
+		
+		model.addAttribute("list", list);
+		
+		return list;
+		
+	}
+	
 //	selectAll + ∆‰¿Ã¬° ±‚¥…..!
 	@RequestMapping(value = "/b01_listpage.do" , method = RequestMethod.GET)
 	public String b01_listpage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
@@ -85,6 +99,7 @@ public class Board01Controller {
 		return "board01/listpage";
 		
 	}
+	
 	
 	@RequestMapping(value = "/b01_listsearch.do" , method = RequestMethod.GET)
 	public String b01_listsearch(@ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {

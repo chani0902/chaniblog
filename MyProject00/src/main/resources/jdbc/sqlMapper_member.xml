@@ -34,8 +34,8 @@
 
 	<select id="MV_SELECT_ALL"
 		resultType="com.test.myproject.member.model.MemberVO">
-		select member_num, member_id, member_pw, member_nickname,
-		member_email, nvl(member_img,'default.jpg') member_img, member_point, member_regdate from member
+		select member_num, member_id, member_nickname,
+		member_email, member_point, member_regdate, authstatus from member
 		order by member_num desc
 	</select>
 

@@ -81,6 +81,18 @@ public class MemberController {
 		return "member/selectAll";
 	}
 	
+	@RequestMapping(value = "/json_mv_selectAll.do" , method = RequestMethod.GET)
+	@ResponseBody
+	public List<MemberVO> json_mv_selectAll(Model model) {
+		logger.info("Welcome json_mv_selectAll!");
+		
+		List<MemberVO> list = ms.selectAll();
+		
+		model.addAttribute("list", list);
+		
+		return list;
+	}
+	
 	@RequestMapping(value = "/mv_searchList.do" , method = RequestMethod.GET)
 	public String mv_searchList(Model model, String searchKey, String searchWord) {
 		logger.info("Welcome mv_searchList!");
@@ -98,13 +110,35 @@ public class MemberController {
 		return "member/selectAll";
 	}
 	
+//	비동기 처리로 회원 정보 뿌리기용 (미구현)
+	@ResponseBody
+	@RequestMapping(value = "/mv_selectOne2.do" , method = RequestMethod.GET)
+	public JSONObject mv_selectOne2(Model model, MemberVO vo, HttpServletRequest request) {
+		logger.info("Welcome mv_selectOne2!");
+		
+//		json 처리 구현
+		MemberVO mVo = new MemberVO();
+		
+		String member_id = request.getParameter("member_id");
+		mVo.setMember_id(member_id);
+		
+		MemberVO mVo2 = ms.selectOne(mVo);
+		
+		JSONObject obj = new JSONObject(mVo2);
+		System.out.println("JSONobject : " + obj);
+		
+		model.addAttribute(obj);
+		
+		return obj;
+	}
 	
 	@RequestMapping(value = "/mv_selectOne.do" , method = RequestMethod.GET)
-	public String mv_selectOne(Model model, MemberVO vo) {
+	public String mv_selectOne(Model model, MemberVO vo, HttpServletRequest request) {
 		logger.info("Welcome mv_selectOne!");
 		
 		MemberVO vo2 = ms.selectOne(vo);
 		
+//		동기 처리 방식
 //		본인 작성 글 목록보기 (ajax로 하려다 실패해서 이렇게 함 ㅠㅠ)
 		String writercheck = vo.getMember_id();
 		List<Board01VO> list2 = b01s.my_post(writercheck);	
