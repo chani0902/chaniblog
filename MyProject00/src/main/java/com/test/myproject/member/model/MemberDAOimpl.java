@@ -45,6 +45,15 @@ public class MemberDAOimpl implements MemberDAO {
 		logger.info("mv_update flag : " + flag);
 		return flag;
 	}
+	
+	@Override
+	public int ad_update(MemberVO vo) {
+		logger.info("mv_ad_update()" + vo);
+		int flag = sqlSession.update("MV_AD_UPDATE", vo);
+		
+		logger.info("mv_ad_update flag : " + flag);
+		return flag;
+	}
 
 	@Override
 	public int delete(MemberVO vo) {

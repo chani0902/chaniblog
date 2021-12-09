@@ -66,13 +66,13 @@ public class MailSendService {
 		dao.GetKey(member_id, key); 
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h1>안녕하세요! :D</h1><h2>" + member_id + "님</h2>"
-				+ "<h2>My Project Community site에 오신 것을 환영합니다.</h2><br>"
+				+ "<h2>DamSo - Community site에 오신 것을 환영합니다.</h2><br>"
 				+ "<h3>인증을 마치면 회원 가입이 완료됩니다!</h3>"
 				+ "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
 				+ "<a href='http://localhost:8090" + request.getContextPath() + "/key_alter?member_id="+ member_id +"&user_key="+key+"'>인증하기</a></p>"
 				+ "<br>(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
 		try {
-			mail.setSubject("[본인인증] My Project Community site 인증 메일입니다", "utf-8");
+			mail.setSubject("[본인인증] DamSo - Community site 인증 메일입니다", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
 			mail.addRecipient(RecipientType.TO, new InternetAddress(member_email));
 			mailSender.send(mail);
@@ -92,13 +92,13 @@ public class MailSendService {
 		
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h1>안녕하세요! :D</h1><h2>" + member_id + "님</h2>"
-				+ "<h2>My Project Community site를 이용해주셔서 감사합니다.</h2><br>"
+				+ "<h2>DamSo - Community site를 이용해주셔서 감사합니다.</h2><br>"
 				+ "<h3>비밀번호를 새롭게 설정해주세요.</h3>"
 				+ "<p>비밀번호 수정 버튼을 누르면 변경 페이지로 이동합니다 : " 
 				+ "<a href='http://localhost:8090" + request.getContextPath() + "/mv_newpw.do?member_id="+ member_id +"'>비밀번호 수정</a></p>"
 				+ "<br>";
 		try {
-			mail.setSubject("[비밀번호 변경] My Project Community site 비밀번호 변경 메일입니다", "utf-8");
+			mail.setSubject("[비밀번호 변경] DamSo - Community site 비밀번호 변경 메일입니다", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
 			mail.addRecipient(RecipientType.TO, new InternetAddress(member_email));
 			mailSender.send(mail);

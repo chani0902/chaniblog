@@ -319,6 +319,38 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping(value = "/mv_ad_update.do" , method = RequestMethod.GET)
+	public String mv_ad_update(MemberVO vo, Model model) {
+		logger.info("Welcome mv_update!");
+		MemberVO vo2 = ms.selectOne(vo);
+		model.addAttribute("vo2", vo2);
+		logger.info("update vo2 : {}", vo2);
+		
+		return "member/ad_update";
+	}
+	
+	@RequestMapping(value ="/mv_ad_updateOK.do", method = RequestMethod.POST)
+	public String mv_ad_updateOK(MemberVO vo, RedirectAttributes rttr) throws IllegalStateException, IOException {
+		logger.info("Welcome mv_ad_updateOK!");
+		
+		logger.info("vo : " + vo);
+		
+		int result2 = 0;
+		
+		result2 = ms.ad_update(vo);
+		logger.info("result2 : " + result2);
+		
+		if(result2 == 1) {
+			rttr.addFlashAttribute("msg", true);
+			return "redirect:mv_selectOne.do?member_id=" + vo.getMember_id();
+		} else {
+			logger.info("result2 : {}", result2);
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:mv_selectOne.do?member_id=" + vo.getMember_id();
+		}
+		
+	}
+	
 	@RequestMapping(value = "/mv_delete.do" , method = RequestMethod.GET)
 	public String mv_delete() {
 		logger.info("Welcome mv_delete!");
@@ -388,9 +420,13 @@ public class MemberController {
 			 session.setMaxInactiveInterval(300); // 300초동안만 세션 유지
 			 session.setAttribute("member", login); // 세션에 가져오기 (모든 정보가 다 담겨있음)
 			 rttr.addFlashAttribute("msg", "로그인 성공");
-		 } else {
+		 } else if (login.getAuthStatus() == 0) {
 			 session.setAttribute("member", null); 
 			 rttr.addFlashAttribute("msg", "메일 인증 요청");
+			 return "redirect:mv_login.do"; 
+		 } else {
+			 session.setAttribute("member", null); 
+			 rttr.addFlashAttribute("msg", "이용 정지 상태");
 			 return "redirect:mv_login.do"; 
 		 }
 		 	  

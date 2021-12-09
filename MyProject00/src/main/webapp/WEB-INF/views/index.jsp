@@ -18,7 +18,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<title>My Project</title>
+<title>DamSo</title>
 </head>
 <body>
 
@@ -28,14 +28,14 @@
 <c:if test="${member == null}">
 	<div class="page-header">
 		<h1>
-			My Project <small>Community site</small>
+			DamSo <small>Community site</small>
 		</h1>
 	</div>
 </c:if>
 <c:if test="${member != null}">
 	<div class="page-header">
 		<h1>
-			My Project <small>Community site :D   Have fun! [${member_nickname}]</small>
+			DamSo <small>Community site :D   Have fun! [${member_nickname}]</small>
 		</h1>
 	</div>
 </c:if>

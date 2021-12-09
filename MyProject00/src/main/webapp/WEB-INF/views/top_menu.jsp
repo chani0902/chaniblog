@@ -14,7 +14,7 @@
 <p></p>
 <ul class="nav nav-pills">
 	<li role="presentation" class="active nav-brand"><a
-		href="index.do"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&emsp;My Project</a></li>
+		href="index.do"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&emsp;DamSo</a></li>
 	<li role="presentation"><a href="b00_listsearch.do">공지사항</a></li>
 	<li role="presentation"><a href="b01_listsearch.do">자유 게시판</a></li>
 	<li role="presentation"><a href="#about">About</a></li>
@@ -50,15 +50,15 @@
 			 
 			<c:choose>
 				<c:when test="${member_id == 'admin'}">
-					<li>
+					<li style="margin-right:5px;">
 						<div class="btn-group">
 							<button type="button" class="btn btn-info dropdown-toggle"
 								data-toggle="dropdown" aria-expanded="false">
 								회원 관리 메뉴 <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="mv_selectAll.do">전체 회원 정보</a></li>
-								<li><a href=#>다른 메뉴</a></li>
+								<li><a href="mv_selectAll.do">
+								<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;전체 회원 정보</a></li>
 							</ul>
 						</div>
 					</li>
@@ -73,8 +73,8 @@
 								<li><a href="mv_selectOne.do?member_id=admin">
 								<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;
 								관리자 계정 정보</a></li>
-								<li><a href=#>
-								<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;나의 활동 내역</a></li>
+								<!-- <li><a href=#>
+								<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;나의 활동 내역</a></li> -->
 								<li><a href="mv_logout.do"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;로그아웃</a></li>
 							</ul>
 						</div>
@@ -94,8 +94,8 @@
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="mv_selectOne.do?member_id=${member_id}">
 								<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;회원 정보</a></li>
-								<li><a href=#>
-								<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;나의 활동 내역</a></li>
+								<!-- <li><a href=#>
+								<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;나의 활동 내역</a></li> -->
 								<li><a href="mv_logout.do"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;로그아웃</a></li>
 							</ul>
 						</div>

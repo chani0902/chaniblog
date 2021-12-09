@@ -46,6 +46,11 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return dao.update(vo);
 	}
+	
+	public int ad_update(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return dao.ad_update(vo);
+	}
 
 	public int delete(MemberVO vo) {
 		// TODO Auto-generated method stub

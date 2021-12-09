@@ -196,16 +196,6 @@ public class Board00Controller {
 		result = b00s.insert(vo);
 		logger.info("result : " + result);
 		
-//		포인트 증가 부분 (세션에서 아이디를 받아다가 집어넣어줌)
-		if (vo.getBoard00_content().length() > 50) {
-			String point = "15";
-			m01s.POINT_POST(writercheck, point);
-//			50자 이상 적으면 15포인트 증가
-		} else {
-			String point = "10";
-			m01s.POINT_POST(writercheck, point);
-		}
-		
 		if(result == 1) {
 			rttr.addFlashAttribute("msg", "글 작성 성공");
 			return "redirect:b00_listsearch.do";

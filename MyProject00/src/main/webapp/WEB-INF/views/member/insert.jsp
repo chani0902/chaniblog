@@ -39,6 +39,19 @@
 		$("#submit").attr("disabled", "disabled");
 	}
 }
+
+/* 공백 입력 불가 함수 */
+function noSpaceForm(obj) { // 공백사용못하게
+	var str_space = /\s/;  // 공백체크
+	if(str_space.exec(obj.value)) { //공백 체크
+	   alert("해당 항목에는 공백을 사용할수 없습니다.\n\n공백은 자동으로 제거 됩니다.");
+	   obj.focus();
+	   obj.value = obj.value.replace(' ',''); // 공백제거
+	   return false;
+	  }
+	 // onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"
+}
+	
 </script>
 
 <style type="text/css">
@@ -70,7 +83,7 @@
 			<tr>
 				<th scope="cols">ID</th>
 				<td width="75%">
-				<input type="text" class="form-control" placeholder="ID" id="member_id" name="member_id" value="dummy_id">
+				<input type="text" class="form-control" placeholder="ID" id="member_id" name="member_id" value="dummy_id" onkeyup="noSpaceForm(this);">
 				
 				<button type="button" class="idcheck btn btn-default btn-space">아이디 중복 확인</button>
 				<p class="result"><span class="msg"></span></p>
@@ -94,7 +107,7 @@
 			</tr>
 			<tr>
 				<th scope="cols">닉네임</th>
-				<td><input type="text" class="form-control" placeholder="Nickname" name="member_nickname" value="dummy_nick"></td>
+				<td><input type="text" class="form-control" placeholder="Nickname" name="member_nickname" value="dummy_nick" onkeyup="noSpaceForm(this);"></td>
 			</tr>
 			<tr>
 				<th scope="cols">이메일</th>

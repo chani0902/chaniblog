@@ -8,6 +8,8 @@ public interface MemberDAO {
 
 	public int update(MemberVO vo);
 	
+	public int ad_update(MemberVO vo);
+	
 	public int delete(MemberVO vo);
 	
 	public MemberVO selectOne(MemberVO vo);

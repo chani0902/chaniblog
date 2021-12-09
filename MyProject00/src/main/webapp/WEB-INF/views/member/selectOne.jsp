@@ -44,7 +44,9 @@
 						</c:when>
 
 						<c:when test="${sessionScope.member_id == 'admin'}">
-							<a href="mv_delete.do?member_id=${vo2.member_id}" class="btn btn-danger">
+							<a href="mv_ad_update.do?member_id=${vo2.member_id}" class="btn btn-info">
+							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&emsp;회원 상태 수정</a><br>
+							<a href="mv_delete.do?member_id=${vo2.member_id}" class="btn btn-danger" style="margin-top:10px;">
 							<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>&emsp;회원 강제 탈퇴</a>
 						</c:when>
 	

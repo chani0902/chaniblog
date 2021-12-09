@@ -32,25 +32,40 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th scope="cols">회원 번호</th>
-					<th scope="cols">프로필 이미지</th>
-					<th scope="cols">ID</th>
-					<th scope="cols">닉네임</th>
-					<th scope="cols">이메일</th>
-					<th scope="cols">포인트</th>
+					<th style="vertical-align:middle;" scope="cols">회원 번호</th>
+					<th style="vertical-align:middle;" scope="cols">프로필 이미지</th>
+					<th style="vertical-align:middle;" scope="cols">ID</th>
+					<th style="vertical-align:middle;" scope="cols">닉네임</th>
+					<th style="vertical-align:middle;" scope="cols">이메일</th>
+					<th style="vertical-align:middle;" scope="cols">포인트</th>
+					<th style="vertical-align:middle;" scope="cols">회원 상태</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="vo" items="${list}">
 
 					<tr>
-						<td>${vo.member_num}</td>
-						<td><img width="50px"
+						<td style="vertical-align:middle;">${vo.member_num}</td>
+						<td style="vertical-align:middle;"><img width="50px"
 							src="resources/uploadimg/${vo.member_img}" class="img-thumbnail"></td>
-						<td><a href="mv_selectOne.do?member_id=${vo.member_id}">${vo.member_id}</a></td>
-						<td>${vo.member_nickname}</td>
-						<td>${vo.member_email}</td>
-						<td>${vo.member_point}</td>
+						<td style="vertical-align:middle;"><a href="mv_selectOne.do?member_id=${vo.member_id}">${vo.member_id}</a></td>
+						<td style="vertical-align:middle;">${vo.member_nickname}</td>
+						<td style="vertical-align:middle;">${vo.member_email}</td>
+						<td style="vertical-align:middle;">${vo.member_point}</td>
+						<td style="vertical-align:middle;">
+							<c:choose>
+								<c:when test="${vo.authStatus == 0}">
+									메일 미인증
+								</c:when>
+								<c:when test="${vo.authStatus == 1}">
+									정상
+								</c:when>
+								<c:when test="${vo.authStatus == 2}">
+									이용 정지
+								</c:when>
+							
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

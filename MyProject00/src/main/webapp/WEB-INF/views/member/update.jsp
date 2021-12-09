@@ -73,15 +73,22 @@
 		</tbody>
 	</table>
 	</div>
-		<button type="submit" id="udsubmit" class="btn btn-success" disabled="disabled"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-		&nbsp;수정 완료</button>
-		<a href="mv_delete.do?member_id=${vo2.member_id}" class="btn btn-danger">
-		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-		&nbsp;회원 탈퇴</a>
+	<c:choose>
+						<c:when test="${sessionScope.member_id == 'admin'}">
+							<button type="submit" id="udsubmit" class="btn btn-success" disabled="disabled"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							&nbsp;수정 완료</button>
+						</c:when>
+						
+						<c:when test="${sessionScope.member_id == vo2.member_id}">
+							<button type="submit" id="udsubmit" class="btn btn-success" disabled="disabled"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							&nbsp;수정 완료</button>
+							<a href="mv_delete.do?member_id=${vo2.member_id}" class="btn btn-danger">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							&nbsp;회원 탈퇴</a>
+						</c:when>
+		
+					</c:choose>	
 	</form>
-	
-	
-	
 	
 	<!-- 비밀번호를 새로 입력해야 수정 완료를 클릭할 수 있게 함 -->
 	<script type="text/javascript">

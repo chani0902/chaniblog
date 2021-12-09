@@ -64,6 +64,10 @@
  					<script>alert("메일 인증이 완료되지 않았습니다! 관리자에게 문의해주세요");</script>
  				</c:when>
  				
+ 				<c:when test="${msg == '이용 정지 상태'}">
+ 					<script>alert("관리자에 의해 이용 정지된 상태입니다. 관리자에게 문의해주세요");</script>
+ 				</c:when>
+ 				
  				<c:when test="${msg == '메일 확인 요망'}">
  					<script>alert("비밀번호 변경 메일이 발송되었습니다. 확인해주세요.");</script>
  				</c:when>
